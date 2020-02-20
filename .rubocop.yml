@@ -1,0 +1,25 @@
+Style/GuardClause:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/LambdaCall:
+  EnforcedStyle: braces
+
+Layout/AlignHash:
+  EnforcedColonStyle: table
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/**/*'
+
+Style/MixinUsage:
+  Exclude:
+    - 'bin/*'
