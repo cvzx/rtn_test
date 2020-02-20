@@ -21,8 +21,6 @@ CommitMsg:
 PreCommit:
   ALL:
     on_warn: fail
-  Reek:
-    enabled: true
   RuboCop:
    enabled: true
   AuthorName:
