@@ -14,4 +14,11 @@ class ProductsController < ApplicationController
 
     render json: seasons, status: :ok
   end
+
+  def movies_and_seasons
+    fetching = FetchMoviesAndSeasons.()
+    products = MovieDecorator.decorate_collection(fetching.result)
+
+    render json: products, status: :ok
+  end
 end
