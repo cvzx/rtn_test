@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Movie < Product
+class User < ApplicationRecord
   has_many :purchases, dependent: :nullify
 end

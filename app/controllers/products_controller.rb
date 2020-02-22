@@ -21,4 +21,18 @@ class ProductsController < ApplicationController
 
     render json: products, status: :ok
   end
+
+  def purchase
+    purchasing = PurchaseProduct.(purchase_params)
+
+    if purchasing.success?
+      render json: {}, status: :ok
+    else
+      render json: { errors: purchasing.errors }, status: :ok
+    end
+  end
+
+  def purchase_params
+    params.permit(:user_id, :product_id, :purchase_option_id)
+  end
 end
