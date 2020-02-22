@@ -38,7 +38,6 @@ JsonMatchers.schema_root = 'spec/json_schemas'
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
-  config.include RSpec::JsonExpectations::Matchers
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
@@ -54,6 +53,8 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+  config.include RSpec::JsonExpectations::Matchers
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

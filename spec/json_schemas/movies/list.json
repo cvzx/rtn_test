@@ -10,7 +10,7 @@
   },
 
   "type": "array",
-  "items": {
+  "movies": {
     "$ref": "#/definitions/movie"
   }
 }
