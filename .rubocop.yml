@@ -20,4 +20,5 @@ Layout/LineLength:
 AllCops:
   Exclude:
     - db/schema.rb
+    - db/migrate/*
     - bin/*

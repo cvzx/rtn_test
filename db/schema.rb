@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_22_092719) do
+ActiveRecord::Schema.define(version: 2020_02_22_114026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 2020_02_22_092719) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "number"
+    t.bigint "season_id"
+    t.index ["season_id"], name: "index_products_on_season_id"
   end
 
+  add_foreign_key "products", "products", column: "season_id", on_delete: :cascade
 end
