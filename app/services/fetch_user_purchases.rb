@@ -2,6 +2,7 @@
 
 class FetchUserPurchases
   prepend SimpleCommand
+  include Cacheable
 
   attr_reader :params
 
@@ -13,7 +14,9 @@ class FetchUserPurchases
     validation = validate_params
 
     if validation.success?
-      fetch_user_purchases_from_db
+      with_caching do
+        fetch_user_purchases_from_db
+      end
     else
       collect_errors(validation)
     end

@@ -2,13 +2,16 @@
 
 class FetchMoviesAndSeasons
   prepend SimpleCommand
+  include Cacheable
 
   TYPES = %w[Movie Season].freeze
 
   def initialize; end
 
   def call
-    fetch_movies_and_seasons_from_db
+    with_caching do
+      fetch_movies_and_seasons_from_db
+    end
   end
 
   private

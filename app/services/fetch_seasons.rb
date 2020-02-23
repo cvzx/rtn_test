@@ -2,11 +2,14 @@
 
 class FetchSeasons
   prepend SimpleCommand
+  include Cacheable
 
   def initialize; end
 
   def call
-    fetch_seasons_from_db
+    with_caching do
+      fetch_seasons_from_db
+    end
   end
 
   private

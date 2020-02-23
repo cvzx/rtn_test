@@ -2,11 +2,14 @@
 
 class FetchMovies
   prepend SimpleCommand
+  include Cacheable
 
   def initialize; end
 
   def call
-    fetch_movies_from_db
+    with_caching do
+      fetch_movies_from_db
+    end
   end
 
   private
