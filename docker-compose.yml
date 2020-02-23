@@ -20,5 +20,12 @@ services:
           nocopy: true
     ports:
       - "5432:5432"
+  redis:
+    image: redis:5.0.7
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - /var/lib/redis/data
 volumes:
   pgdata:
