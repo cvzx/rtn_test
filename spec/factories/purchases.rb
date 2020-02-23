@@ -5,5 +5,10 @@ FactoryBot.define do
     association :user
     association :product
     association :purchase_option
+    expires_at { Time.now + 2.days }
+
+    trait :expired do
+      expires_at { Time.now - 2.days }
+    end
   end
 end

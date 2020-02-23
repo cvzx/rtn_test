@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe MovieDecorator do
   let(:movie) { create(:movie) }
 
-  subject { MovieDecorator.new(movie) }
+  subject { described_class.new(movie) }
 
   describe '#as_json' do
     let(:expected_hash) do

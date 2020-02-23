@@ -63,7 +63,7 @@ RSpec.describe PurchaseProduct do
           is_expected.to be_failure
         end
 
-        it 'returns correct validation errors' do
+        it 'returns correct errors' do
           expect(subject.errors).to eq(expected_errors)
         end
       end
