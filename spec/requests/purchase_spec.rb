@@ -55,6 +55,10 @@ RSpec.describe 'Purchase product', type: :request do
           }
         end
 
+        let(:expected_error) do
+          { 'user_id' => 'must be an integer' }
+        end
+
         it 'does not create new purchase' do
           expect do
             post '/products/purchase', params: params
@@ -65,7 +69,7 @@ RSpec.describe 'Purchase product', type: :request do
           post '/products/purchase', params: params
 
           expect(response).to have_http_status(200)
-          expect(json_body['errors']['user_id']).not_to be_empty
+          expect(json_body['errors']).to eq(expected_error)
         end
       end
 
@@ -78,6 +82,10 @@ RSpec.describe 'Purchase product', type: :request do
           }
         end
 
+        let(:expected_error) do
+          { 'product_id' => 'must be an integer' }
+        end
+
         it 'does not create new purchase' do
           expect do
             post '/products/purchase', params: params
@@ -88,7 +96,7 @@ RSpec.describe 'Purchase product', type: :request do
           post '/products/purchase', params: params
 
           expect(response).to have_http_status(200)
-          expect(json_body['errors']['product_id']).not_to be_empty
+          expect(json_body['errors']).to eq(expected_error)
         end
       end
 
@@ -101,6 +109,10 @@ RSpec.describe 'Purchase product', type: :request do
           }
         end
 
+        let(:expected_error) do
+          { 'purchase_option_id' => 'must be an integer' }
+        end
+
         it 'does not create new purchase' do
           expect do
             post '/products/purchase', params: params
@@ -111,7 +123,7 @@ RSpec.describe 'Purchase product', type: :request do
           post '/products/purchase', params: params
 
           expect(response).to have_http_status(200)
-          expect(json_body['errors']['purchase_option_id']).not_to be_empty
+          expect(json_body['errors']).to eq(expected_error)
         end
       end
 
@@ -133,6 +145,10 @@ RSpec.describe 'Purchase product', type: :request do
         end
 
         context 'when product is active' do
+          let(:expected_error) do
+            { 'base' => I18n.t('errors.already_purchased') }
+          end
+
           it 'does not create new purchase' do
             expect do
               post '/products/purchase', params: params
@@ -143,7 +159,7 @@ RSpec.describe 'Purchase product', type: :request do
             post '/products/purchase', params: params
 
             expect(response).to have_http_status(200)
-            expect(json_body['errors']).not_to be_empty
+            expect(json_body['errors']).to eq(expected_error)
           end
         end
 
@@ -180,6 +196,10 @@ RSpec.describe 'Purchase product', type: :request do
           }
         end
 
+        let(:expected_error) do
+          { 'base' => I18n.t('errors.no_purchase_option') }
+        end
+
         before { trade_offer.update_columns(product_id: movies.last.id) }
 
         it 'does not create new purchase' do
@@ -192,7 +212,7 @@ RSpec.describe 'Purchase product', type: :request do
           post '/products/purchase', params: params
 
           expect(response).to have_http_status(200)
-          expect(json_body['errors']).not_to be_empty
+          expect(json_body['errors']).to eq(expected_error)
         end
       end
     end

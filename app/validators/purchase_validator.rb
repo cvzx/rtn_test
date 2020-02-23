@@ -9,13 +9,13 @@ class PurchaseValidator < Dry::Validation::Contract
 
   rule(:product_id, :purchase_option_id) do
     unless trade_offer_exists?(values[:product_id], values[:purchase_option_id])
-      base.failure('The product has no such purchase options')
+      key(:base).failure I18n.t('errors.no_purchase_option')
     end
   end
 
   rule(:user_id, :product_id) do
     if user_has_product?(values[:user_id], values[:product_id])
-      base.failure('You already have this product in your library')
+      key(:base).failure I18n.t('errors.already_purchased')
     end
   end
 

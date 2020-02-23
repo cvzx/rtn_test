@@ -11,18 +11,19 @@ RSpec.describe 'User purchases list', type: :request do
 
     let!(:active_purchases) do
       movies.first(3).map do |movie|
-        create(:purchase, user: user, product: movie, purchase_option: purchase_option)
+        create_purchase(movie)
       end
     end
 
     let!(:expired_purchases) do
       movies.last(2).map do |movie|
-        create(:purchase, :expired, user: user, product: movie, purchase_option: purchase_option)
+        create_purchase(movie)
       end
     end
 
     let(:expected_purchases) do
-      active_purchases.sort_by(&:expires_at).as_json(only: %i[title plot expires_at])
+      active_purchases.sort_by(&:expires_at)
+                      .as_json(only: %i[title plot expires_at])
     end
 
     context 'when params are valid' do
@@ -51,5 +52,14 @@ RSpec.describe 'User purchases list', type: :request do
         end
       end
     end
+  end
+
+  private
+
+  def create_purchase(product)
+    create(:purchase,
+           user: user,
+           product: product,
+           purchase_option: purchase_option)
   end
 end

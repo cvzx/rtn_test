@@ -30,4 +30,6 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    no_purchase_option: 'The product has no such purchase options'
+    already_purchased: 'You already have this product in your library'

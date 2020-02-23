@@ -13,13 +13,13 @@ RSpec.describe FetchUserPurchases do
 
     let!(:active_purchases) do
       movies.first(5).map do |movie|
-        create(:purchase, user: user, product: movie, purchase_option: purchase_option)
+        create_purchase(movie)
       end
     end
 
     let!(:expired_purchases) do
       movies.last(5).map do |movie|
-        create(:purchase, :expired, user: user, product: movie, purchase_option: purchase_option)
+        create_inactive_purchase(movie)
       end
     end
 
@@ -63,5 +63,21 @@ RSpec.describe FetchUserPurchases do
         expect(subject.errors).to eq(expected_errors.to_h)
       end
     end
+  end
+
+  private
+
+  def create_purchase(product)
+    create(:purchase,
+           user:            user,
+           product:         product,
+           purchase_option: purchase_option)
+  end
+
+  def create_inactive_purchase(product)
+    create(:purchase, :expired,
+           user:            user,
+           product:         product,
+           purchase_option: purchase_option)
   end
 end
