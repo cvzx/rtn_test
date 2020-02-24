@@ -1,26 +1,26 @@
 language: ruby
-rvm:
-- 2.7.0
-cache: bundler
-bundler_args: --jobs 3 --retry 3
+
+services:
+  - docker
+
 before_install:
-  - travis_retry gem update --system --no-document
-  - travis_retry gem install bundler
+  - docker -v
+  - docker-compose -v
+
+install:
+  - docker-compose build
+
+before_script:
+  - docker-compose run --rm --no-deps web echo 'Gems now pre-installed.'
+  - docker ps
+
 notifications:
   webhooks: https://coveralls.io/webhook
-jobs:
-  include:
-    - stage: 'Code scanning'
-      name: 'Codestyle checking'
-      script:
-        - bundle exec rubocop
-    - stage: 'Testing'
-      name: 'Testing'
-      services:
-        - postgresql
-      before_script:
-        - bundle exec rake db:setup
-      script:
-        - bundle exec rake rspec
-      after_script:
-        - bundle exec rake coveralls:push
+
+script:
+  - docker-compose exec web rubocop
+  - docker-compose exec web rspec
+
+after_script:
+  - docker-compose exec web coveralls:push
+  - docker-compose down
