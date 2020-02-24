@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get '/seasons', to: 'products#seasons'
     get '/movies_and_seasons', to: 'products#movies_and_seasons'
 
-    post '/purchase', to: 'products#purchase'
+    post '/:product_id/purchase', to: 'products#purchase'
   end
 
   scope :users do

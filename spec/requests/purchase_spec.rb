@@ -22,20 +22,19 @@ RSpec.describe 'Purchase product', type: :request do
       let(:params) do
         {
           user_id: user.id,
-          product_id: product.id,
           purchase_option_id: purchase_option.id
         }
       end
 
       it 'returns success' do
-        post '/products/purchase', params: params
+        post "/products/#{product.id}/purchase", params: params
 
         expect(response).to have_http_status(200)
       end
 
       it 'creates new purchase' do
         expect do
-          post '/products/purchase', params: params
+          post "/products/#{product.id}/purchase", params: params
         end.to change(Purchase, :count).from(0).to(1)
 
         expect(purchase.expires_at)
@@ -49,7 +48,6 @@ RSpec.describe 'Purchase product', type: :request do
         let(:params) do
           {
             user_id: nil,
-            product_id: product.id,
             purchase_option_id: purchase_option.id
           }
         end
@@ -60,40 +58,12 @@ RSpec.describe 'Purchase product', type: :request do
 
         it 'does not create new purchase' do
           expect do
-            post '/products/purchase', params: params
+            post "/products/#{product.id}/purchase", params: params
           end.not_to change(Purchase, :count)
         end
 
         it 'retuns error messages' do
-          post '/products/purchase', params: params
-
-          expect(response).to have_http_status(200)
-          expect(response).to match_json_schema('purchase/errors')
-          expect(json_body['errors']).to eq(expected_error)
-        end
-      end
-
-      context 'when product_id is nil' do
-        let(:params) do
-          {
-            user_id: user.id,
-            product_id: nil,
-            purchase_option_id: purchase_option.id
-          }
-        end
-
-        let(:expected_error) do
-          { 'product_id' => 'must be an integer' }
-        end
-
-        it 'does not create new purchase' do
-          expect do
-            post '/products/purchase', params: params
-          end.not_to change(Purchase, :count)
-        end
-
-        it 'retuns error messages' do
-          post '/products/purchase', params: params
+          post "/products/#{product.id}/purchase", params: params
 
           expect(response).to have_http_status(200)
           expect(response).to match_json_schema('purchase/errors')
@@ -105,7 +75,6 @@ RSpec.describe 'Purchase product', type: :request do
         let(:params) do
           {
             user_id: user.id,
-            product_id: product.id,
             purchase_option_id: nil
           }
         end
@@ -116,12 +85,12 @@ RSpec.describe 'Purchase product', type: :request do
 
         it 'does not create new purchase' do
           expect do
-            post '/products/purchase', params: params
+            post "/products/#{product.id}/purchase", params: params
           end.not_to change(Purchase, :count)
         end
 
         it 'retuns error messages' do
-          post '/products/purchase', params: params
+          post "/products/#{product.id}/purchase", params: params
 
           expect(response).to have_http_status(200)
           expect(response).to match_json_schema('purchase/errors')
@@ -141,7 +110,6 @@ RSpec.describe 'Purchase product', type: :request do
         let(:params) do
           {
             user_id: user.id,
-            product_id: product.id,
             purchase_option_id: purchase_option.id
           }
         end
@@ -153,12 +121,12 @@ RSpec.describe 'Purchase product', type: :request do
 
           it 'does not create new purchase' do
             expect do
-              post '/products/purchase', params: params
+              post "/products/#{product.id}/purchase", params: params
             end.not_to change(Purchase, :count)
           end
 
           it 'retuns error messages' do
-            post '/products/purchase', params: params
+            post "/products/#{product.id}/purchase", params: params
 
             expect(response).to have_http_status(200)
             expect(response).to match_json_schema('purchase/errors')
@@ -180,7 +148,7 @@ RSpec.describe 'Purchase product', type: :request do
 
           it 'creates new purchase' do
             expect do
-              post '/products/purchase', params: params
+              post "/products/#{product.id}/purchase", params: params
             end.to change(Purchase, :count).by(1)
 
             expect(response).to have_http_status(200)
@@ -194,7 +162,6 @@ RSpec.describe 'Purchase product', type: :request do
         let(:params) do
           {
             user_id: user.id,
-            product_id: product.id,
             purchase_option_id: purchase_option.id
           }
         end
@@ -207,12 +174,12 @@ RSpec.describe 'Purchase product', type: :request do
 
         it 'does not create new purchase' do
           expect do
-            post '/products/purchase', params: params
+            post "/products/#{product.id}/purchase", params: params
           end.not_to change(Purchase, :count)
         end
 
         it 'retuns error messages' do
-          post '/products/purchase', params: params
+          post "/products/#{product.id}/purchase", params: params
 
           expect(response).to have_http_status(200)
           expect(response).to match_json_schema('purchase/errors')
@@ -226,7 +193,6 @@ RSpec.describe 'Purchase product', type: :request do
         let(:params) do
           {
             user_id: user.id,
-            product_id: product.id,
             purchase_option_id: purchase_option.id
           }
         end
@@ -241,12 +207,12 @@ RSpec.describe 'Purchase product', type: :request do
 
         it 'does not create new purchase' do
           expect do
-            post '/products/purchase', params: params
+            post "/products/#{product.id}/purchase", params: params
           end.not_to change(Purchase, :count)
         end
 
         it 'retuns error messages' do
-          post '/products/purchase', params: params
+          post "/products/#{product.id}/purchase", params: params
 
           expect(response).to have_http_status(200)
           expect(response).to match_json_schema('purchase/errors')
