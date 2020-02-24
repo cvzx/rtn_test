@@ -12,6 +12,7 @@ install:
 
 before_script:
   - docker-compose run --rm --no-deps web echo 'Gems now pre-installed.'
+  - docker-compose up -d
   - docker ps
 
 notifications:
