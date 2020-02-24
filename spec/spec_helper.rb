@@ -20,6 +20,9 @@ require 'simplecov-console'
 require 'rspec/json_expectations'
 require 'json_matchers/rspec'
 require 'factory_bot'
+require 'coveralls'
+
+Coveralls.wear!
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
   [

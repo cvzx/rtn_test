@@ -13,6 +13,7 @@ gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 gem 'redis-rails'
 gem 'simple_command'
+gem 'coveralls', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri]
