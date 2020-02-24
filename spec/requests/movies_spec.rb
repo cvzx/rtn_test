@@ -14,7 +14,7 @@ RSpec.describe 'Movies list', type: :request do
       get '/products/movies'
 
       expect(response).to have_http_status(200)
-      # expect(response).to match_json_schema('movies/list')
+      expect(response).to match_json_schema('movies/list')
       expect(response.body).to include_json(expected_movies)
     end
   end

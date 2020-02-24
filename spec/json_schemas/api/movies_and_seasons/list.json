@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+
+  "definitions": {
+    "movie_or_season": {
+      "allOf": [
+        { "$ref": "file:/movies_and_seasons/movie_or_season.json#" }
+      ]
+    }
+  },
+
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/movie_or_season"
+  }
+}

@@ -2,15 +2,15 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
 
   "definitions": {
-    "movie": {
+    "season": {
       "allOf": [
-        { "$ref": "file:/movies/movie.json#" }
+        { "$ref": "file:/seasons/season.json#" }
       ]
     }
   },
 
   "type": "array",
-  "movies": {
-    "$ref": "#/definitions/movie"
+  "items": {
+    "$ref": "#/definitions/season"
   }
 }

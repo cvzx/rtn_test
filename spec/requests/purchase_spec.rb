@@ -31,7 +31,6 @@ RSpec.describe 'Purchase product', type: :request do
         post '/products/purchase', params: params
 
         expect(response).to have_http_status(200)
-        # expect(response).to match_json_schema('purchase/success')
       end
 
       it 'creates new purchase' do
@@ -69,6 +68,7 @@ RSpec.describe 'Purchase product', type: :request do
           post '/products/purchase', params: params
 
           expect(response).to have_http_status(200)
+          expect(response).to match_json_schema('purchase/errors')
           expect(json_body['errors']).to eq(expected_error)
         end
       end
@@ -96,6 +96,7 @@ RSpec.describe 'Purchase product', type: :request do
           post '/products/purchase', params: params
 
           expect(response).to have_http_status(200)
+          expect(response).to match_json_schema('purchase/errors')
           expect(json_body['errors']).to eq(expected_error)
         end
       end
@@ -123,6 +124,7 @@ RSpec.describe 'Purchase product', type: :request do
           post '/products/purchase', params: params
 
           expect(response).to have_http_status(200)
+          expect(response).to match_json_schema('purchase/errors')
           expect(json_body['errors']).to eq(expected_error)
         end
       end
@@ -159,6 +161,7 @@ RSpec.describe 'Purchase product', type: :request do
             post '/products/purchase', params: params
 
             expect(response).to have_http_status(200)
+            expect(response).to match_json_schema('purchase/errors')
             expect(json_body['errors']).to eq(expected_error)
           end
         end
@@ -212,6 +215,7 @@ RSpec.describe 'Purchase product', type: :request do
           post '/products/purchase', params: params
 
           expect(response).to have_http_status(200)
+          expect(response).to match_json_schema('purchase/errors')
           expect(json_body['errors']).to eq(expected_error)
         end
       end

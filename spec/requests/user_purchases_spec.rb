@@ -33,7 +33,7 @@ RSpec.describe 'User purchases list', type: :request do
         get "/users/#{user_id}/purchases"
 
         expect(response).to have_http_status(200)
-        # expect(response).to match_json_schema('user_purchases/list')
+        expect(response).to match_json_schema('user_purchases/list')
         expect(response.body).to include_json(expected_purchases)
       end
     end
@@ -41,13 +41,13 @@ RSpec.describe 'User purchases list', type: :request do
     context 'when params are invalid' do
       context 'when user_id is nil' do
         let(:user_id)        { nil }
-        let(:expected_error) { { 'user_id' => 'is missing' } }
+        let(:expected_error) { { errors: { 'user_id' => 'is missing' } } }
 
         it 'returns correct validation error' do
           get "/users/#{user_id}/purchases"
 
           expect(response).to have_http_status(200)
-          # expect(response).to match_json_schema('user_purchases/errors')
+          expect(response).to match_json_schema('user_purchases/errors')
           expect(response.body).to include_json(expected_error)
         end
       end

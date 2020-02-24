@@ -34,7 +34,7 @@ SimpleCov.start do
   add_filter 'spec/'
 end
 
-JsonMatchers.schema_root = 'spec/json_schemas'
+JsonMatchers.schema_root = 'spec/json_schemas/api'
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods

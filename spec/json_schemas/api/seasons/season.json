@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "file:/seasons/season.json#",
+
+  "definitions": {
+    "episode": {
+      "allOf": [
+        { "$ref": "file:/seasons/episode.json#" }
+      ]
+    }
+  },
+
+  "type": "object",
+  "properties": {
+    "number": {
+      "type": "number"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plot": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "episodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/episode"
+      }
+    }
+  },
+  "required": ["number", "title", "plot", "created_at"],
+  "additionalProperties": false
+}

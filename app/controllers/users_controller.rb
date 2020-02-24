@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
       render json: purchases, status: :ok
     else
-      render json: fetching.errors, status: :ok
+      render json: { errors: fetching.errors }, status: :ok
     end
   end
 

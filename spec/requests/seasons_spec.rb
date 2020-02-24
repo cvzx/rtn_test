@@ -24,7 +24,7 @@ RSpec.describe 'Seasons list', type: :request do
       get '/products/seasons'
 
       expect(response).to have_http_status(200)
-      # expect(response).to match_json_schema('seasons/list')
+      expect(response).to match_json_schema('seasons/list')
       expect(response.body).to include_json(expected_seasons)
     end
   end

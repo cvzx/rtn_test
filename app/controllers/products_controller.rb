@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
     purchasing = PurchaseProduct.(purchase_params)
 
     if purchasing.success?
-      render json: {}, status: :ok
+      head :ok
     else
       render json: { errors: purchasing.errors }, status: :ok
     end

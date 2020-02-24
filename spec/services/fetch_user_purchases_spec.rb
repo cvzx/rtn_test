@@ -69,15 +69,15 @@ RSpec.describe FetchUserPurchases do
 
   def create_purchase(product)
     create(:purchase,
-           user:            user,
-           product:         product,
+           user: user,
+           product: product,
            purchase_option: purchase_option)
   end
 
   def create_inactive_purchase(product)
     create(:purchase, :expired,
-           user:            user,
-           product:         product,
+           user: user,
+           product: product,
            purchase_option: purchase_option)
   end
 end
