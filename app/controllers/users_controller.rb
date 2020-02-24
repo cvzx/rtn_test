@@ -2,15 +2,10 @@
 
 class UsersController < ApplicationController
   def purchases
-    fetching = FetchUserPurchases.(user_purchses_list_params)
+    fetching  = FetchUserPurchases.(user_purchses_list_params)
+    purchases = UserPurchaseDecorator.decorate_collection(fetching.result)
 
-    if fetching.success?
-      purchases = UserPurchaseDecorator.decorate_collection(fetching.result)
-
-      render json: purchases, status: :ok
-    else
-      render json: { errors: fetching.errors }, status: :ok
-    end
+    render json: purchases, status: :ok
   end
 
   def user_purchses_list_params
