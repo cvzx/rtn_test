@@ -7,6 +7,12 @@ class PurchaseValidator < Dry::Validation::Contract
     required(:purchase_option_id).value(:integer)
   end
 
+  rule(:product_id) do
+    unless product_available_for_purchase?(value)
+      key(:base).failure I18n.t('errors.not_available')
+    end
+  end
+
   rule(:product_id, :purchase_option_id) do
     unless trade_offer_exists?(values[:product_id], values[:purchase_option_id])
       key(:base).failure I18n.t('errors.no_purchase_option')
@@ -20,6 +26,12 @@ class PurchaseValidator < Dry::Validation::Contract
   end
 
   private
+
+  def product_available_for_purchase?(product_id)
+    product = Product.find(product_id)
+
+    Product::AVAILABLE_FOR_SALE.include?(product.type)
+  end
 
   def trade_offer_exists?(product_id, purchase_option_id)
     TradeOffer.where(

@@ -31,5 +31,6 @@
 
 en:
   errors:
+    not_available: 'The product is not available for purchase'
     no_purchase_option: 'The product has no such purchase options'
     already_purchased: 'You already have this product in your library'

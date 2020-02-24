@@ -219,6 +219,40 @@ RSpec.describe 'Purchase product', type: :request do
           expect(json_body['errors']).to eq(expected_error)
         end
       end
+
+      context 'when the product is not available to purchase' do
+        let(:product) { create(:episode) }
+
+        let(:params) do
+          {
+            user_id: user.id,
+            product_id: product.id,
+            purchase_option_id: purchase_option.id
+          }
+        end
+
+        let(:expected_error) do
+          { 'base' => I18n.t('errors.not_available') }
+        end
+
+        before do
+          trade_offer.update_columns(product_id: product.id)
+        end
+
+        it 'does not create new purchase' do
+          expect do
+            post '/products/purchase', params: params
+          end.not_to change(Purchase, :count)
+        end
+
+        it 'retuns error messages' do
+          post '/products/purchase', params: params
+
+          expect(response).to have_http_status(200)
+          expect(response).to match_json_schema('purchase/errors')
+          expect(json_body['errors']).to eq(expected_error)
+        end
+      end
     end
   end
 
