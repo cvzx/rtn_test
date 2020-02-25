@@ -20,7 +20,6 @@ notifications:
 
 script:
   - docker-compose exec web rubocop
-  - docker-compose exec web rake db:test:prepare
   - docker-compose exec web rspec
 
 after_script:
