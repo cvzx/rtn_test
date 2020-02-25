@@ -1,24 +1,29 @@
-# README
+Movies api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+movies list
+```
+GET products/movies
+```
 
-Things you may want to cover:
+seasons list
+```
+GET products/seasons
+```
 
-* Ruby version
+movies and seasons list
+```
+GET products/movies_and_seasons
+```
 
-* System dependencies
+Purchase product
+```
+POST products/:product_id/purchase
+```
+params: user_id, purchase_option_id
 
-* Configuration
 
-* Database creation
+User's purchases
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+users/:user_id/purchases
+```
